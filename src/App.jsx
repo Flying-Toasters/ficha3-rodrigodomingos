@@ -21,7 +21,8 @@ const cards = [
 ];
 
 
-  
+
+
 
 function App() {
 
@@ -29,14 +30,21 @@ const [filter, setFilter] = useState("Todas");
 
 const [search, setSearch] = useState("");
 
-
-
 const visible = cards.filter(
-    (card) => filter === "Todas" || card.type === filter
+    (card) => {const filtro = filter === "Todas" || card.type === filter
+    const matchSearch = card.name.toLowerCase().includes(search);
+    return filtro && matchSearch;
+    }
   );  
+
+
+
   
+
   return (
     
+    
+
     <main>
       <button onClick={() => setFilter("Demónio")}>
         Só demónios
@@ -53,11 +61,14 @@ const visible = cards.filter(
         onChange={(e) => setSearch(e.target.value)}
       />
 
+
       <h1>Eu tenho {cards.length} cartas</h1>
-      
+
       {visible.map((card) => (
         <Card key={card.name} {...card}/>
       ))}
+
+      
     </main>
   );
 
