@@ -27,7 +27,7 @@ const cards = [
 function App() {
 
 const [filter, setFilter] = useState("Todas");
-
+const [luckyCard, setCard] = useState(null);
 const [search, setSearch] = useState("");
 
 const visible = cards.filter(
@@ -37,15 +37,22 @@ const visible = cards.filter(
     }
   );  
 
-
-
-  
-
+function takeCard() {
+  const index = Math.floor(Math.random() * cards.length)
+  setCard(cards[index])
+}
   return (
     
     
 
     <main>
+
+      <input
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+
+
       <button onClick={() => setFilter("Demónio")}>
         Só demónios
       </button>
@@ -55,23 +62,26 @@ const visible = cards.filter(
       <button onClick={() => setFilter("Todas")}>
         Todas
       </button>
+      <button onClick={takeCard}> Lucky Card </button>
+      {luckyCard && (
+        <div>
+          <h2>Lucky Card: </h2>
+          <Card card={luckyCard}/>
+        </div>
+      )}
 
-      <input
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-
-
-      <h1>Eu tenho {cards.length} cartas</h1>
-
-      {visible.map((card) => (
-        <Card key={card.name} {...card}/>
-      ))}
+     
 
       
+
+
+      <h1>Eu tenho {visible.length} cartas</h1>
+
+      {visible.map((card, index) => (
+        <Card key={index} card={card}/>
+      ))}
     </main>
   );
-
 }
 
 export default App;
