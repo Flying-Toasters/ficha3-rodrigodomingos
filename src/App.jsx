@@ -22,6 +22,7 @@ const cards = [
 function App() {
   return (
     <main>
+      <h1>Tenho {cards.length} cartas</h1>
       {cards.map((card) => (
         <Card key={card.name} {...card}/>
       ))}
