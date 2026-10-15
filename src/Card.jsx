@@ -1,7 +1,9 @@
-function Card({name, attack}) {
+import { useState } from "react";
+
+function Card({name, type, attack}) {
   return (
     <li className="card">
-      {name}, ataque: {attack} {attack >= 6 && <span>forte</span>}
+      {name}, tipo: {type}, ataque: {attack} {attack >= 6 && <span>forte</span>}
     </li>
   );
 }

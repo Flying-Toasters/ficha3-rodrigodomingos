@@ -1,4 +1,5 @@
 import Card from "./Card.jsx";
+import { useState } from "react";
 // PONTO DE PARTIDA DA AULA 4
 //
 // É exatamente onde o professor acabou o live coding do Bloco 1:
@@ -19,11 +20,42 @@ const cards = [
     { name: "Gray", type: "Humano", attack: 2, defense: 3 }
 ];
 
+
+  
+
 function App() {
+
+const [filter, setFilter] = useState("Todas");
+
+const [search, setSearch] = useState("");
+
+
+
+const visible = cards.filter(
+    (card) => filter === "Todas" || card.type === filter
+  );  
+  
   return (
+    
     <main>
+      <button onClick={() => setFilter("Demónio")}>
+        Só demónios
+      </button>
+      <button onClick={() => setFilter("Humano")}>
+        Só humanos
+      </button>
+      <button onClick={() => setFilter("Todas")}>
+        Todas
+      </button>
+
+      <input
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+
       <h1>Eu tenho {cards.length} cartas</h1>
-      {cards.map((card) => (
+      
+      {visible.map((card) => (
         <Card key={card.name} {...card}/>
       ))}
     </main>
