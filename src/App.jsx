@@ -20,7 +20,14 @@ const cards = [
 ];
 
 function App() {
- 
+  return (
+    <main>
+      {cards.map((card) => (
+        <Card key={card.name} {...card}/>
+      ))}
+    </main>
+  );
+
 }
 
 export default App;
